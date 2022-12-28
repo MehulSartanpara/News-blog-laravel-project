@@ -46,16 +46,24 @@
                     <div class="col-md-12">
                        <ul class="admin-menu">
                             <li>
-                                <a href="{{ url('admin/index') }}">Post</a>
+                                <a @if(url()->current() == url('admin/index')) style="color: #fff; background-color: #1E90FF;" @endif href="{{ url('admin/index') }}">
+                                    Post
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ url('admin/category') }}">Category</a>
+                                <a @if(url()->current() == url('admin/category')) style="color: #fff; background-color: #1E90FF;" @endif href="{{ url('admin/category') }}">
+                                    Category
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ url('admin/admins') }}">Users</a>
+                                <a @if(url()->current() == url('admin/admins')) style="color: #fff; background-color: #1E90FF;" @endif href="{{ url('admin/admins') }}">
+                                    Users
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ url('admin/images') }}">Images</a>
+                                <a @if(url()->current() == url('admin/images')) style="color: #fff; background-color: #1E90FF;" @endif href="{{ url('admin/images') }}">
+                                    Images
+                                </a>
                             </li>
                         </ul>
                     </div>
