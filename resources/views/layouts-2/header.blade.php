@@ -25,6 +25,7 @@
         <div class="row">
             <!-- LOGO -->
             <div class=" col-md-offset-4 col-md-4">
+                <!-- <a href="{{ url('/index') }}" id="logo"><img src="{{ asset('images/logs.png') }}"></a> -->
                 <a href="{{ url('/index') }}" id="logo"><img src="{{ asset('images/news.jpg') }}"></a>
             </div>
             <!-- /LOGO -->
