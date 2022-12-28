@@ -13,8 +13,8 @@ use function PHPUnit\Framework\returnSelf;
 class AdminController extends Controller
 {
     function index(){
-        $admin = Admin::paginate(5);
-        return view('admin/admins',compact('admin'));
+            $admin = Admin::paginate(5);
+            return view('admin/admins',compact('admin'));
     }
     function create(){
         return view('admin/add-admin');
