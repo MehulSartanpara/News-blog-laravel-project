@@ -20,7 +20,7 @@ class PostController extends Controller
         if(session()->has('loginId')){
             $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
         }
-        $post = Post::paginate(10); 
+        $post = Post::orderBy('id','desc')->paginate(10);
         return view('admin/index',compact('post','LogIn'));
     }
 

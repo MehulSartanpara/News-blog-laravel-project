@@ -50,6 +50,7 @@
                                     Post
                                 </a>
                             </li>
+                            @if( $LogIn->role == 1 )
                             <li>
                                 <a @if(url()->current() == url('admin/category')) style="color: #fff; background-color: #1E90FF;" @endif href="{{ url('admin/category') }}">
                                     Category
@@ -65,6 +66,7 @@
                                     Images
                                 </a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
