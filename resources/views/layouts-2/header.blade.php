@@ -26,7 +26,7 @@
             <!-- LOGO -->
             <div class=" col-md-offset-4 col-md-4">
                 <!-- <a href="{{ url('/index') }}" id="logo"><img src="{{ asset('images/logs.png') }}"></a> -->
-                <a href="{{ url('/index') }}" id="logo"><img src="{{ asset('images/news.jpg') }}"></a>
+                <a href="{{ url('/') }}" id="logo"><img src="{{ asset('images/news.jpg') }}"></a>
             </div>
             <!-- /LOGO -->
         </div>
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class='menu'>
-                    <li><a href='/index' class="">Home</a></li>
+                    <li><a href='/' class="">Home</a></li>
                     @foreach ($catagory as $item)
                     <li>
                         <form class="search-post admin-name-on-post" action="{{ url('search') }}" method ="GET">

@@ -22,11 +22,6 @@ use App\Http\Controllers\ImagesController;
 // For Admins
 Route::get('admin',[AdminController::class, 'loginreq'])->middleware('AlreadyLoggedIn');
 Route::post('admin',[AdminController::class, 'login'])->middleware('AlreadyLoggedIn');
-
-// Route::get('admin/index', function () {
-//     return view('admin/index');
-// });
-
 Route::get('/admin/logout',[AdminController::class, 'logout']);
 
 
@@ -76,8 +71,6 @@ Route::post('admin/add-images',[ImagesController::class, 'store'])->middleware('
 
 // For FontEnd Data
 
-Route::get('index',[HomeController::class, 'allData']);
+Route::get('/',[HomeController::class, 'allData']);
 Route::get('single-post/{id}',[HomeController::class, 'SinglePost']);
 Route::get('search',[HomeController::class, 'Search']);
-
-
