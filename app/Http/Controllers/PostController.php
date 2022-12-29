@@ -10,35 +10,44 @@ use App\Models\Category;
 
 use App\Models\Post;
 
+use App\Models\Admin;
 
 
 class PostController extends Controller
 {
     public function index(){
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        }
         $post = Post::paginate(10); 
-        return view('admin/index',compact('post'));
+        return view('admin/index',compact('post','LogIn'));
     }
 
     public function create(){
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        }
         $catagory = Category::all();
-        return view('admin/add-post',compact('catagory'));
+        return view('admin/add-post',compact('catagory','LogIn'));
     }
 
     public function store(Request $request){
-        // $request->validate([
-        //     'post_title' => 'required',
-        //     'postdesc' => 'required',
-        //     'category' => 'required',
-        //     'username' => 'required',
-        //     'fileToUpload' => 'required',
-        // ]);
+        $request->validate([
+            'post_title' => 'required',
+            'postdesc' => 'required',
+            'category' => 'required',
+            'username' => 'required',
+            'fileToUpload' => 'required',
+        ]);
 
         $post = new Post;
         $post->title = $request->input('post_title');
         $post->description = $request->input('postdesc');
         $post->category = $request->input('category');
         $post->date = date('d M, Y');
-        $post->admin = session('username');
+        $post->admin = $request->input('username');
         if($request->hasFile('fileToUpload'))
         {
             $file = $request->file('fileToUpload');
@@ -53,9 +62,13 @@ class PostController extends Controller
 
     public function edit($id)
     {
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        }
         $post = Post::find($id);
         $catagory = Category::all();
-        return view('admin/update-post',compact('post','catagory'));
+        return view('admin/update-post',compact('post','catagory','LogIn'));
     }
 
     public function update(Request $request, $id)

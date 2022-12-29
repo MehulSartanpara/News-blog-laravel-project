@@ -20,52 +20,46 @@ use App\Http\Controllers\ImagesController;
 
 
 // For Admins
-Route::get('admin', function () {
-    return view('admin/login');
-});
-Route::post('admin',[AdminController::class, 'login']);
+Route::get('admin',[AdminController::class, 'loginreq'])->middleware('AlreadyLoggedIn');
+Route::post('admin',[AdminController::class, 'login'])->middleware('AlreadyLoggedIn');
 
-Route::get('admin/index', function () {
-    return view('admin/index');
-});
+// Route::get('admin/index', function () {
+//     return view('admin/index');
+// });
 
-Route::get('/admin/logout', function () {
-        session()->pull('id');
-        session()->pull('username');
-        session()->pull('user_img');
-        session()->pull('first_name');
-        return redirect('admin');
-});
-Route::get('admin/admins',[AdminController::class, 'index']);
-Route::get('admin/add-admin',[AdminController::class, 'create']);
-Route::post('admin/add-admin',[AdminController::class, 'store']);
-Route::get('admin/update-admin/{id}',[AdminController::class, 'update']);
-Route::put('admin/edit-admin/{id}',[AdminController::class, 'edit']);
-Route::get('admin/delete-admin/{id}',[AdminController::class, 'destroy']);
+Route::get('/admin/logout',[AdminController::class, 'logout']);
+
+
+Route::get('admin/admins',[AdminController::class, 'index'])->middleware('isLoggedIn');
+Route::get('admin/add-admin',[AdminController::class, 'create'])->middleware('isLoggedIn');
+Route::post('admin/add-admin',[AdminController::class, 'store'])->middleware('isLoggedIn');
+Route::get('admin/update-admin/{id}',[AdminController::class, 'update'])->middleware('isLoggedIn');
+Route::put('admin/edit-admin/{id}',[AdminController::class, 'edit'])->middleware('isLoggedIn');
+Route::get('admin/delete-admin/{id}',[AdminController::class, 'destroy'])->middleware('isLoggedIn');
 
 
 
 
 // For Catagor
 
-Route::get('admin/category',[CategoryController::class, 'index']);
-Route::get('admin/add-category',[CategoryController::class, 'create']);
-Route::post('admin/add-category',[CategoryController::class, 'store']);
-Route::get('admin/update-category/{cat_id}',[CategoryController::class, 'update']);
-Route::put('admin/update-category/{cat_id}',[CategoryController::class, 'edit']);
-Route::get('admin/delete-category/{cat_id}',[CategoryController::class, 'destroy']);
+Route::get('admin/category',[CategoryController::class, 'index'])->middleware('isLoggedIn');
+Route::get('admin/add-category',[CategoryController::class, 'create'])->middleware('isLoggedIn');
+Route::post('admin/add-category',[CategoryController::class, 'store'])->middleware('isLoggedIn');
+Route::get('admin/update-category/{cat_id}',[CategoryController::class, 'update'])->middleware('isLoggedIn');
+Route::put('admin/update-category/{cat_id}',[CategoryController::class, 'edit'])->middleware('isLoggedIn');
+Route::get('admin/delete-category/{cat_id}',[CategoryController::class, 'destroy'])->middleware('isLoggedIn');
 
 
 
 
 // For Post
 
-Route::get('admin/index',[PostController::class, 'index']);
-Route::get('admin/add-post',[PostController::class, 'create']);
-Route::post('admin/add-post',[PostController::class, 'store']);
-Route::get('admin/edit-post/{id}',[PostController::class, 'edit']);
-Route::put('admin/update-post/{id}',[PostController::class, 'update']);
-Route::get('admin/delete-post/{id}',[PostController::class, 'destroy']);
+Route::get('admin/index',[PostController::class, 'index'])->middleware('isLoggedIn');
+Route::get('admin/add-post',[PostController::class, 'create'])->middleware('isLoggedIn');
+Route::post('admin/add-post',[PostController::class, 'store'])->middleware('isLoggedIn');
+Route::get('admin/edit-post/{id}',[PostController::class, 'edit'])->middleware('isLoggedIn');
+Route::put('admin/update-post/{id}',[PostController::class, 'update'])->middleware('isLoggedIn');
+Route::get('admin/delete-post/{id}',[PostController::class, 'destroy'])->middleware('isLoggedIn');
 
 
 
@@ -73,40 +67,17 @@ Route::get('admin/delete-post/{id}',[PostController::class, 'destroy']);
 
 // For Images
 
-Route::get('admin/images',[ImagesController::class, 'index']);
-Route::get('admin/add-images',[ImagesController::class, 'create']);
-Route::post('admin/add-images',[ImagesController::class, 'store']);
+Route::get('admin/images',[ImagesController::class, 'index'])->middleware('isLoggedIn');
+Route::get('admin/add-images',[ImagesController::class, 'create'])->middleware('isLoggedIn');
+Route::post('admin/add-images',[ImagesController::class, 'store'])->middleware('isLoggedIn');
+
+
 
 
 // For FontEnd Data
 
 Route::get('index',[HomeController::class, 'allData']);
 Route::get('single-post/{id}',[HomeController::class, 'SinglePost']);
-
 Route::get('search',[HomeController::class, 'Search']);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// For FrontEnd
-
-Route::get('/', function () {
-    return view('index');
-});
 

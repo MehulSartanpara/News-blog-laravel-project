@@ -4,18 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use App\Models\Admin;
 
 class ImagesController extends Controller
 {
     public function index()
     {
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        }
         $images = Image::all();
-        return view('admin/images',compact('images'));
+        return view('admin/images',compact('images','LogIn'));
     }
 
     public function create()
     {
-        return view('admin/add-images');
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        }
+        $images = Image::all();
+        return view('admin/add-images',compact('LogIn'));
     }
 
     public function store(Request $request)

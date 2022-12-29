@@ -30,8 +30,8 @@
                     <!-- /LOGO -->
                       <!-- LOGO-Out -->
                     <div class="admin-login-info">
-                        <img class="login-admin-profile" src="{{ asset('images/'.session('user_img')) }}" style="margin-bottom: 10px;">
-                        <span class="admin-logout" style="text-decoration: none;">{{session('username')}}</span>
+                        <img class="login-admin-profile" src="{{ asset('images/'.$LogIn->user_img) }}" style="margin-bottom: 10px;">
+                        <span class="admin-logout" style="text-decoration: none;">{{ $LogIn->username }}</span>
                         <a href="/admin/logout" class="admin-logout">logout</a>
                     </div>
                     <!-- /LOGO-Out -->

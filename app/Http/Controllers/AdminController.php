@@ -3,21 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\File;
+
+use Session;
 
 use function PHPUnit\Framework\returnSelf;
 
 
 class AdminController extends Controller
 {
-    function index(){
-            $admin = Admin::paginate(5);
-            return view('admin/admins',compact('admin'));
+    function index(){     
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        } 
+        $admin = Admin::paginate(5);
+        return view('admin/admins',compact('admin','LogIn'));
     }
+
     function create(){
-        return view('admin/add-admin');
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        } 
+        return view('admin/add-admin',compact('LogIn'));
     }
     function store(Request $request){
         $request->validate([
@@ -50,8 +62,12 @@ class AdminController extends Controller
 
     function update($id)
     {
+        $LogIn = array();
+        if(session()->has('loginId')){
+            $LogIn =  Admin::where('id','=', session()->get('loginId'))->first();
+        } 
         $admin = Admin::find($id);
-        return view('admin/update-admin',compact('admin'));
+        return view('admin/update-admin',compact('admin','LogIn'));
     }
 
     function edit(Request $request, $id)
@@ -102,23 +118,49 @@ class AdminController extends Controller
         return redirect('admin/admins')->with('delete','Admin Deleted Successfully');;
     }
 
-    function login(Request $req)
+    function loginreq()
     {
-        $req->validate([
+        return view('admin/login');
+    }
+    function login(Request $request)
+    {
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $admin =  Admin::where('email', $req->input('email'))->get();
-        if($admin[0]->password == $req->input('password'))
-        {
-            $req->session()->put('id ', $admin[0]->id);
-            $req->session()->put('username', $admin[0]->username);
-            $req->session()->put('user_img', $admin[0]->user_img);
-            $req->session()->put('first_name', $admin[0]->first_name);
-            return redirect('admin/index');
+
+        $admin =  Admin::where('email','=', $request->email)->first();
+        if($admin){
+            if ($request->input('password') == $admin->password)
+            {
+                $request->session()->put('loginId', $admin->id);
+                return redirect('admin/index');
+            }else{
+                return redirect('admin')->with('error','Password is not Matches.');
+            }
+        }else{
+            return redirect('admin')->with('error','Email is not registered.');
         }
-        else{
-            return redirect('admin')->with('error','Email or Password Does Not Match');
+        // $admin =  Admin::where('email', $req->input('email'))->get();
+        // if($admin[0]->password == $req->input('password'))
+        // {
+        //     $req->session()->put('id ', $admin[0]->id);
+        //     $req->session()->put('username', $admin[0]->username);
+        //     $req->session()->put('user_img', $admin[0]->user_img);
+        //     $req->session()->put('first_name', $admin[0]->first_name);
+        //     return redirect('admin/index');
+        // }
+        // else{
+        //     return redirect('admin')->with('error','Email or Password Does Not Match');
+        // }
+    }
+
+    function logout()
+    {
+        if(session()->has('loginId')){
+            session()->pull('loginId');
+            return redirect('admin');
         }
     }
+
 }

@@ -42,6 +42,7 @@
                             @enderror
                           </span>
                       </div>
+                      <input type="hidden" name="username" class="form-control" value="{{ $LogIn->username }}" placeholder="Profile Picture" required>
                       <div class="form-group">
                           <label for="exampleInputPassword1">Post image</label>
                           <input type="file" name="fileToUpload" class="form-control" placeholder="Profile Picture" required>
