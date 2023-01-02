@@ -16,7 +16,8 @@ class HomeController extends Controller
         $post = Post::orderBy('id','asc')->paginate(5);
         $re_post = Post::orderBy('id','desc')->paginate(5);
         $catagory = Category::all();
-        return view('index',compact('post','catagory','re_post'));
+        $post_marque = Post::all();
+        return view('index',compact('post','catagory','re_post','post_marque'));
     }
 
     function SinglePost($id)
@@ -24,7 +25,8 @@ class HomeController extends Controller
         $post = Post::find($id);
         $re_post = Post::orderBy('id','desc')->paginate(5);
         $catagory = Category::all();
-        return view('single-post',compact('post','catagory','re_post'));
+        $post_marque = Post::all();
+        return view('single-post',compact('post','catagory','re_post','post_marque'));
     }
 
     function Search(Request $request)
@@ -33,9 +35,10 @@ class HomeController extends Controller
         if($search != ""){
             $post = Post::where('title', 'LIKE', "%$search%")->orWhere('admin', 'LIKE', "%$search%")->orWhere('category', 'LIKE', "%$search%")->get();
             $catagory = Category::all();
-            return view('search',compact('post','catagory','search'));
+            $post_marque = Post::all();
+            return view('search',compact('post','catagory','search','post_marque'));
         }else{
-            return view('index');
+            return redirect('/');
         }
     }
 }

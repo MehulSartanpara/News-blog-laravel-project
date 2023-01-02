@@ -15,16 +15,43 @@
                     {{ session('success') }}
                 </div>
               @endif
-              <div class="col-md-12">
-                <div class="admin-images-container">
-                    @foreach ($images as $item)
-                        <div class="admin-images-inner">
-                            <img class="" src="{{ asset('images/'.$item->images) }}">
-                        </div>
-                    @endforeach
-                </div> 
-              </div>
+              @foreach($images as $image)   
+                <div class="data-images" data-images="{{ $image->name }}"></div>
+              @endforeach
+                <div class="container">
+                    <div class="images-content">
+                        
+                    </div>
+                </div>
           </div>
       </div> 
   </div>
+<style>
+.images-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+.main-img {
+    flex: 0 0 25%;
+    max-width: calc(25% - 20px);
+    margin: 10px;
+}
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+</style>
+<script>
+    $(document).ready(function() {
+        $('.data-images').each(function(){
+            let ImageArray = $(this).attr('data-images');
+            ImageArray = JSON.parse(ImageArray);
+            ImageArray.forEach(element => {
+                console.log(element);
+                var Image =  $('<img class="main-img" src="http://127.0.0.1:8000/uploads/'+element+'">');
+                $('.images-content').prepend(Image);
+            });
+        }); 
+    });
+</script>
 @endsection

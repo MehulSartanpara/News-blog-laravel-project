@@ -25,7 +25,7 @@
         <div class="row">
             <!-- LOGO -->
             <div class=" col-md-offset-4 col-md-4">
-                <!-- <a href="{{ url('/index') }}" id="logo"><img src="{{ asset('images/logs.png') }}"></a> -->
+                <!-- <a href="{{ url('/') }}" id="logo"><img src="{{ asset('images/logs.png') }}"></a> -->
                 <a href="{{ url('/') }}" id="logo"><img src="{{ asset('images/news.jpg') }}"></a>
             </div>
             <!-- /LOGO -->
@@ -54,6 +54,16 @@
         </div>
     </div>
 </div>
+
+    <div class="Marquee">
+        <div class="Marquee-content">
+            @foreach ($post_marque as $item)
+                <a href='{{ url("single-post/".$item->id) }}'>
+                    <div class="Marquee-tag">{{ $item->title }}</div>
+                </a>
+            @endforeach  
+        </div>
+    </div>
 
     @yield('content-2')
 

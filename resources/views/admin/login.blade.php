@@ -24,7 +24,7 @@
                         @csrf
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="" >
+                                <input type="email" name="email" class="form-control" placeholder="" value="{{old('email')}}">
                                 <span class="text-danger" id="basic-addon3">
                                     @error('email')
                                         {{ $message }}

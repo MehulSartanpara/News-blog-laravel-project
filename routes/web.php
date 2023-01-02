@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\FileUpload;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,9 +62,9 @@ Route::get('admin/delete-post/{id}',[PostController::class, 'destroy'])->middlew
 
 // For Images
 
-Route::get('admin/images',[ImagesController::class, 'index'])->middleware('isLoggedIn');
-Route::get('admin/add-images',[ImagesController::class, 'create'])->middleware('isLoggedIn');
-Route::post('admin/add-images',[ImagesController::class, 'store'])->middleware('isLoggedIn');
+Route::get('admin/images',[FileUpload::class, 'index'])->middleware('isLoggedIn');
+Route::get('admin/add-images', [FileUpload::class, 'createForm'])->middleware('isLoggedIn');
+Route::post('admin/add-images', [FileUpload::class, 'fileUpload'])->name('imageUpload');
 
 
 

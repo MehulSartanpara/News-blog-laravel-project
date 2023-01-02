@@ -36,11 +36,58 @@
                                 {{ $post->description }}
                             </p>
                             <div class="back-home-main">
-                                <a href="/index" class="read-more">Back</a>
+                                <a href="/" class="read-more">Back</a>
                             </div>
                         </div>
                     </div>
                     <!-- /post-container -->
+
+                    <div class="post-container comment-section">
+                        <h4>Comment Box :</h4><hr>
+                        <form action="" method="POST">
+                        @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}" class="form-control" required>
+                            <input type="hidden" name="post_status" value="0" class="form-control" required>
+                            <div class="form-group">
+                                <input type="text" name="user_name" class="form-control" autocomplete="off" required placeholder="Your Name" style="margin-bottom: 16px;">
+                                <span class="text-danger" id="basic-addon3"></span>
+                            </div>
+                            <div class="form-group">
+                                <textarea type="text" name="comment" class="form-control" autocomplete="off" required placeholder="Write your comment" style="height: 80px;"></textarea>
+                                <span class="text-danger" id="basic-addon3"></span>
+                            </div>
+                            <div class="back-home-main">
+                                <button class="read-more btn btn-primary">Post Comment</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h4>Recent Comments</h4><br>
+                        <div class="user-comment-single">
+                            <div class="form-group user-comment-info">
+                                <img class="comment-user-image" src="{{ asset('images/219983.png') }}"/>
+                                <span>Mehul Sartanpara</span>
+                                <span><i class="fa fa-calendar" aria-hidden="true"></i>27 Dec, 2022</span>
+                            </div>
+                            <div class="form-group user-comment-content">
+                            <span class="user-comment-text">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                            </span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="user-comment-single">
+                            <div class="form-group user-comment-info">
+                                <img class="comment-user-image" src="{{ asset('images/219983.png') }}"/>
+                                <span>Jenish Patel</span>
+                            </div>
+                            <div class="form-group user-comment-content">
+                            <span class="user-comment-text">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div id="sidebar" class="col-md-4">
                     <!-- search box -->
