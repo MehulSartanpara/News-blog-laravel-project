@@ -75,8 +75,7 @@
                         </form>
                         <hr>
                         <h4>Recent Comments</h4><br>
-
-                        @forelse($post->comments as $comment)
+                        @forelse($post->comments->reverse() as $comment)
                         <div class="user-comment-single">
                             <div class="form-group user-comment-info">
                                 <div class="user-comment-name-main">
@@ -84,7 +83,7 @@
                                     <span>{!! $comment->user_name !!}</span>
                                 </div>
                                 <div class="user-comment-date-main">
-                                    <span><i class="fa fa-calendar" aria-hidden="true"></i>{{ $comment->created_at->format('d M, Y') }}</span>
+                                    <span><i style="font-size: 14px;" class="fa fa-clock-o" aria-hidden="true"></i>{{ $comment->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
                             <div class="form-group user-comment-content">
