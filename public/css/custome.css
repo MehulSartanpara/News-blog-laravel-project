@@ -215,7 +215,17 @@ h2.page-heading{
     padding: 0;
     box-shadow: none;
 }
-
+.form-group.user-comment-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.user-comment-date-main span {
+    font-size: 13px;
+}
+.user-comment-date-main i {
+    padding-right: 6px;
+}
 
 
 

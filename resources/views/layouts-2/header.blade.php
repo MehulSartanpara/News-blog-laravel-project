@@ -76,5 +76,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $(document).on("click",".myAlert-bottom .close, .myAlert-top .close",function(e){
+            e.preventDefault();
+            $('.alert').hide();
+        });
+    });
+</script>
 </body>
 </html>

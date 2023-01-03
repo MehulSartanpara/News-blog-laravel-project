@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FileUpload;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +75,5 @@ Route::post('admin/add-images', [FileUpload::class, 'fileUpload'])->name('imageU
 Route::get('/',[HomeController::class, 'allData']);
 Route::get('single-post/{id}',[HomeController::class, 'SinglePost']);
 Route::get('search',[HomeController::class, 'Search']);
+
+Route::post('save-comment',[CommentController::class, 'Store']);
