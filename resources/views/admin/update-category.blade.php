@@ -15,6 +15,19 @@
                       <div class="form-group">
                           <label>Category Name</label>
                           <input type="text" name="cat" value="{{ $category->category_name }}" class="form-control" placeholder="Category Name" required>
+                          <span class="text-danger" id="basic-addon3">
+                            @error('cat')
+                                {{ $message }}
+                            @enderror
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <input type="hidden" name="no_post" value="{{ $category->no_post }}" class="form-control" placeholder="Category Name" required>
+                          <span class="text-danger" id="basic-addon3">
+                            @error('no_post')
+                                {{ $message }}
+                            @enderror
+                          </span>
                       </div>
                       <input type="submit" name="save" class="btn btn-primary" value="Update" required />
                   </form>

@@ -26,8 +26,14 @@ class CategoryController extends Controller
 
     function store(Request $request){
 
+        $request->validate([
+            'cat' => 'required',
+            'no_post' => 'required',
+        ]);
+
         $category = new Category();
         $category->category_name = $request->input('cat');
+        $category->no_post = $request->input('no_post');
         $category->save();
         return redirect('admin/category')->with('success','Category Added Successfully');
     }
@@ -44,8 +50,13 @@ class CategoryController extends Controller
 
     function edit(Request $request, $cat_id)
     {
+        $request->validate([
+            'cat' => 'required',
+            'no_post' => 'required',
+        ]);
         $category = Category::find($cat_id);
         $category->category_name = $request->input('cat');
+        $category->no_post = $request->input('no_post');
         $category->update();
         return redirect('admin/category')->with('update','Category Update Successfully');
     }
